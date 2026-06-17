@@ -1,0 +1,20 @@
+LEAN SIX SIGMA WHITE BELT PROJECT REPORT
+DEFINE (Project Charter)
+Problem Statement: Our regional logistics operations are experiencing excessive fuel consumption and an inflated carbon footprint due to unplanned route deviations and high vehicle idling times at ports and depots.
+Project Objective: To eliminate operational waste (Muda), minimize total fuel oil consumption, and simulate a green supply chain transition by reducing CO2 emissions.
+MEASURE (Baseline Data)
+Using our Python data analytics script, we successfully quantified the As-Is operational baseline:
+Total Fuel Consumed: 367.50 Liters (Diesel)
+Total Carbon Footprint: 984.90 kg CO2
+Total Wasted Distance: 69.0 KM (Route Deviation)
+ANALYZE (Waste Identification / Muda)
+Through data stratification, we identified the root causes of our supply chain inefficiencies:
+Transportation Waste: Major route deviations were found in SHP-2026-003 (+25 KM) and SHP-2026-005 (+15 KM), indicating poor navigation or lack of standardized routing.
+Waiting Waste: SHP-2026-006 sat idling at the Izmir Port for 5.0 hours. Keeping the heavy truck engine running wasted 15 Liters of fuel on a single trip without adding any value to the logistics process.
+IMPROVE (To-Be Optimization Strategy)
+To reach a lean and green state, we propose the following counter-measures:
+GPS-Backed Dynamic Routing: Standardize navigation to match planned distances, eliminating the 69 KM of wasted transportation mileage.
+Dynamic Slotting and Appointment Windows: Re-engineer depot entry processes to slash port waiting times to a standard maximum of 0.5 hours per vehicle.
+CONTROL (Sustainability Plan)
+This Python-based carbon tracking algorithm will be deployed as a standard continuous monitoring tool. Logistics KPIs will be audited quarterly to ensure compliance with green logistics standards and fuel saving goals.
+
