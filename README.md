@@ -1,1 +1,2 @@
 # Lean-Six-Sigma-Green-Logistics-Optimization-Project
+​This data-driven project focuses on optimizing regional logistics and supply chain movements by combining Lean Six Sigma methodologies with Green Logistics frameworks. Using Python (Pandas & Matplotlib), an operational "As-Is" baseline was established, measured, and transformed into an optimized "To-Be" state to reduce corporate carbon footprints and fuel oil expenditures.
