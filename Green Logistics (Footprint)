@@ -1,0 +1,93 @@
+import pandas as pd
+
+# 1. Directly embedding the logistics dataset into the code (No external Excel file needed!)
+data = {
+    "Shipment_ID": ["SHP-2026-001", "SHP-2026-002", "SHP-2026-003", "SHP-2026-004", "SHP-2026-005", "SHP-2026-006", "SHP-2026-007"],
+    "Vehicle_Type": ["Heavy_Truck", "Medium_Truck", "Heavy_Truck", "Heavy_Truck", "Medium_Truck", "Heavy_Truck", "Medium_Truck"],
+    "Origin_Node": ["Aydin_DM", "Aydin_DM", "Manisa_Factory", "Izmir_Port", "Denizli_Center", "Manisa_Factory", "Aydin_DM"],
+    "Destination_Node": ["Izmir_Port", "Denizli_Center", "Aydin_DM", "Manisa_Factory", "Izmir_Port", "Izmir_Port", "Manisa_Factory"],
+    "Planned_Distance_KM": [110, 125, 140, 45, 245, 45, 115],
+    "Actual_Distance_KM": [125, 126, 165, 45, 260, 58, 115],
+    "Payload_Tons": [24, 12, 20, 22, 14, 25, 10],
+    "Depot_Waiting_Hours": [3.5, 1.0, 4.2, 0.5, 2.8, 5.0, 1.2],
+    "Fuel_Type": ["Ultra_Low_Sulfur_Diesel"] * 7
+}
+
+# Create the DataFrame directly from the dictionary
+df = pd.DataFrame(data)
+
+# 2. Fuel and Carbon Footprint Calculation Function
+def calculate_logistics_metrics(row):
+    # Fuel consumed while driving (Distance * 0.35 Liters)
+    transit_fuel = row['Actual_Distance_KM'] * 0.35
+
+    # Fuel consumed while idling at depot/port (Waiting Hours * 3.0 Liters)
+    idling_fuel = row['Depot_Waiting_Hours'] * 3.0
+
+    # Total Fuel Consumption
+    total_fuel = transit_fuel + idling_fuel
+
+    # Carbon Footprint (1 Liter of Diesel = 2.68 kg CO2)
+    carbon_footprint_kg = total_fuel * 2.68
+
+    # Lean Waste: Excess kilometers driven (Actual - Planned) -> Transportation Waste
+    route_deviation_km = row['Actual_Distance_KM'] - row['Planned_Distance_KM']
+
+    return pd.Series([total_fuel, carbon_footprint_kg, route_deviation_km])
+
+# Apply calculations to the dataframe
+df[['Total_Fuel_Liters', 'Carbon_Footprint_KG', 'Route_Deviation_KM']] = df.apply(calculate_logistics_metrics, axis=1)
+
+# Print results to the console
+print("--- SHIPMENT-BASED CARBON & FUEL REPORT ---")
+print(df[['Shipment_ID', 'Total_Fuel_Liters', 'Carbon_Footprint_KG', 'Route_Deviation_KM']])
+
+print("\n--- GLOBAL OPERATIONS TOTALS ---")
+print(f"Total Fuel Consumed: {df['Total_Fuel_Liters'].sum():.2f} Liters")
+print(f"Total Carbon Footprint: {df['Carbon_Footprint_KG'].sum():.2f} kg CO2")
+print(f"Wasted Distance due to Route Deviation: {df['Route_Deviation_KM'].sum()} KM")
+import matplotlib.pyplot as plt
+
+# Set the style and size of the chart
+plt.figure(figsize=(10, 6))
+
+# Create a professional bar chart for Carbon Footprint
+bars = plt.bar(df['Shipment_ID'], df['Carbon_Footprint_KG'], color='#2E7D32', edgecolor='#1B5E20', alpha=0.85)
+
+# Add data labels on top of each bar for clear visibility
+for bar in bars:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, yval + 5, f"{yval:.1f} kg", ha='center', va='bottom', fontsize=10, fontweight='bold')
+
+# Chart Title and Axis Labels (Professional Logistics Formatting)
+plt.title('Carbon Footprint Baseline Analysis per Shipment (As-Is Status)', fontsize=14, fontweight='bold', pad=20, color='#1A237E')
+plt.xlabel('Shipment Identification (ID)', fontsize=12, fontweight='semibold', labelpad=10)
+plt.ylabel('CO2 Emissions (kg)', fontsize=12, fontweight='semibold', labelpad=10)
+
+# Add a clean grid for scannability
+plt.grid(axis='y', linestyle='--', alpha=0.5)
+
+# Optimize layout to prevent text clipping
+plt.tight_layout()
+
+# Display the chart
+plt.show()
+
+
+
+
+ --- SHIPMENT-BASED CARBON & FUEL REPORT ---
+    Shipment_ID  Total_Fuel_Liters  Carbon_Footprint_KG  Route_Deviation_KM
+0  SHP-2026-001              54.25              145.390                15.0
+1  SHP-2026-002              47.10              126.228                 1.0
+2  SHP-2026-003              70.35              188.538                25.0
+3  SHP-2026-004              17.25               46.230                 0.0
+4  SHP-2026-005              99.40              266.392                15.0
+5  SHP-2026-006              35.30               94.604                13.0
+6  SHP-2026-007              43.85              117.518                 0.0
+
+--- GLOBAL OPERATIONS TOTALS ---
+Total Fuel Consumed: 367.50 Liters
+Total Carbon Footprint: 984.90 kg CO2
+Wasted Distance due to Route Deviation: 69.0 KM
+
