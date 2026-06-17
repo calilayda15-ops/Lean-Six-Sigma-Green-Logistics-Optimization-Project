@@ -1,0 +1,59 @@
+MANUAL MATHEMATICAL VALIDATION REPORT
+1. Baseline Constants Used for Calculation:
+Transit Fuel Consumption Rate: 0.35 Liters per KM
+Idling Fuel Consumption Rate: 3.0 Liters per Hour
+Carbon Conversion Factor: 2.68 kg CO2 per Liter of Diesel
+2. Detailed Verification for Shipment SHP-2026-001 (Aydin_DM to Izmir_Port):
+Inputs: Actual Distance = 125 KM, Planned Distance = 110 KM, Depot Waiting = 3.5 Hours
+Route Deviation Calculation: 125 KM - 110 KM = 15.0 KM (Transportation Waste)
+Transit Fuel Consumption: 125 KM * 0.35 L/KM = 43.75 Liters
+Idling Fuel Consumption: 3.5 Hours * 3.0 L/Hour = 10.50 Liters
+Total Fuel Consumption: 43.75 Liters + 10.50 Liters = 54.25 Liters
+Carbon Footprint Calculation: 54.25 Liters * 2.68 kg/L = 145.39 kg CO2
+3. Detailed Verification for Shipment SHP-2026-002 (Aydin_DM to Denizli_Center):
+Inputs: Actual Distance = 126 KM, Planned Distance = 125 KM, Depot Waiting = 1.0 Hour
+Route Deviation Calculation: 126 KM - 125 KM = 1.0 KM (Transportation Waste)
+Transit Fuel Consumption: 126 KM * 0.35 L/KM = 44.10 Liters
+Idling Fuel Consumption: 1.0 Hour * 3.0 L/Hour = 3.00 Liters
+Total Fuel Consumption: 44.10 Liters + 3.00 Liters = 47.10 Liters
+Carbon Footprint Calculation: 47.10 Liters * 2.68 kg/L = 126.228 kg CO2
+4. Detailed Verification for Shipment SHP-2026-003 (Manisa_Factory to Aydin_DM):
+Inputs: Actual Distance = 165 KM, Planned Distance = 140 KM, Depot Waiting = 4.2 Hours
+Route Deviation Calculation: 165 KM - 140 KM = 25.0 KM (Transportation Waste)
+Transit Fuel Consumption: 165 KM * 0.35 L/KM = 57.75 Liters
+Idling Fuel Consumption: 4.2 Hours * 3.0 L/Hour = 12.60 Liters
+Total Fuel Consumption: 57.75 Liters + 12.60 Liters = 70.35 Liters
+Carbon Footprint Calculation: 70.35 Liters * 2.68 kg/L = 188.538 kg CO2
+5. Detailed Verification for Shipment SHP-2026-004 (Izmir_Port to Manisa_Factory):
+Inputs: Actual Distance = 45 KM, Planned Distance = 45 KM, Depot Waiting = 0.5 Hours
+Route Deviation Calculation: 45 KM - 45 KM = 0.0 KM (Zero Waste)
+Transit Fuel Consumption: 45 KM * 0.35 L/KM = 15.75 Liters
+Idling Fuel Consumption: 0.5 Hours * 3.0 L/Hour = 1.50 Liters
+Total Fuel Consumption: 15.75 Liters + 1.50 Liters = 17.25 Liters
+Carbon Footprint Calculation: 17.25 Liters * 2.68 kg/L = 46.23 kg CO2
+6. Detailed Verification for Shipment SHP-2026-005 (Denizli_Center to Izmir_Port):
+Inputs: Actual Distance = 260 KM, Planned Distance = 245 KM, Depot Waiting = 2.8 Hours
+Route Deviation Calculation: 260 KM - 245 KM = 15.0 KM (Transportation Waste)
+Transit Fuel Consumption: 260 KM * 0.35 L/KM = 91.00 Liters
+Idling Fuel Consumption: 2.8 Hours * 3.0 L/Hour = 8.40 Liters
+Total Fuel Consumption: 91.00 Liters + 8.40 Liters = 99.40 Liters
+Carbon Footprint Calculation: 99.40 Liters * 2.68 kg/L = 266.392 kg CO2
+7. Detailed Verification for Shipment SHP-2026-006 (Manisa_Factory to Izmir_Port):
+Inputs: Actual Distance = 58 KM, Planned Distance = 45 KM, Depot Waiting = 5.0 Hours
+Route Deviation Calculation: 58 KM - 45 KM = 13.0 KM (Transportation Waste)
+Transit Fuel Consumption: 58 KM * 0.35 L/KM = 20.30 Liters
+Idling Fuel Consumption: 5.0 Hours * 3.0 L/Hour = 15.00 Liters
+Total Fuel Consumption: 20.30 Liters + 15.00 Liters = 35.30 Liters
+Carbon Footprint Calculation: 35.30 Liters * 2.68 kg/L = 94.604 kg CO2
+8. Detailed Verification for Shipment SHP-2026-007 (Aydin_DM to Manisa_Factory):
+Inputs: Actual Distance = 115 KM, Planned Distance = 115 KM, Depot Waiting = 1.2 Hours
+Route Deviation Calculation: 115 KM - 115 KM = 0.0 KM (Zero Waste)
+Transit Fuel Consumption: 115 KM * 0.35 L/KM = 40.25 Liters
+Idling Fuel Consumption: 1.2 Hours * 3.0 L/Hour = 3.60 Liters
+Total Fuel Consumption: 40.25 Liters + 3.60 Liters = 43.85 Liters
+Carbon Footprint Calculation: 43.85 Liters * 2.68 kg/L = 117.518 kg CO2
+9. Global Operations Summary Verification:
+Total Wasted Distance: 15.0 + 1.0 + 25.0 + 0.0 + 15.0 + 13.0 + 0.0 = 69.0 KM
+Total Fleet Fuel Consumption: 54.25 + 47.10 + 70.35 + 17.25 + 99.40 + 35.30 + 43.85 = 367.50 Liters
+Total System Carbon Footprint: 367.50 Liters * 2.68 kg/L = 984.90 kg CO2
+
