@@ -1,0 +1,17 @@
+PROJECT BUSINESS CASE & IMPACT SUMMARY
+PROJECT OVERVIEW
+This data-driven project aimed to optimize regional supply chain movements by combining Lean Six Sigma principles with Green Logistics frameworks. Using Python (Pandas & Matplotlib), we simulated an operational transformation to minimize corporate carbon footprint and decrease overall fuel consumption.
+LEAN METHODOLOGY APPLIED: IMPROVE STAGE
+To transition from our "As-Is" baseline to the optimized "To-Be" state, we eliminated two major operational wastes (Muda):
+Transportation Waste: Eliminated 69.0 KM of unnecessary route deviations via GPS-backed standardized dynamic routing.
+Waiting Waste: Capped vehicle idling times at a strict maximum of 0.5 hours per shipment by implementing an automated appointment scheduling system (Dynamic Slotting).
+MEASURABLE QUANTITATIVE RESULTS
+Our optimization engine yielded significant efficiency gains across the fleet:
+Carbon Footprint Baseline (As-Is) : 984.90 kg CO2
+Optimized Carbon Footprint (To-Be): 801.99 kg CO2
+Total CO2 Mitigation            : 182.91 kg CO2 Saved (18.6% Reduction)
+Total Fleet Fuel Saved          : 68.25 Liters of Diesel Consumed Less
+STRATEGIC BUSINESS VALUE
+By deploying this algorithmic tracking framework, the organization achieves dual value:
+Environmental Impact: Directly contributes to corporate Sustainability Goals and Green House Gas (GHG) reduction targets.
+Financial Efficiency: Substantially decreases fuel oil expenditures, increasing bottom-line profitability through waste elimination.
