@@ -1,0 +1,72 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 1. Load Baseline Data
+data = {
+    "Shipment_ID": ["SHP-2026-001", "SHP-2026-002", "SHP-2026-003", "SHP-2026-004", "SHP-2026-005", "SHP-2026-006", "SHP-2026-007"],
+    "Planned_Distance_KM": [110, 125, 140, 45, 245, 45, 115],
+    "Actual_Distance_KM": [125, 126, 165, 45, 260, 58, 115],
+    "Depot_Waiting_Hours": [3.5, 1.0, 4.2, 0.5, 2.8, 5.0, 1.2]
+}
+df = pd.DataFrame(data)
+
+# 2. As-Is (Baseline) Calculations
+df['AsIs_Fuel'] = (df['Actual_Distance_KM'] * 0.35) + (df['Depot_Waiting_Hours'] * 3.0)
+df['AsIs_CO2'] = df['AsIs_Fuel'] * 2.68
+
+# 3. To-Be (Lean & Green Optimized) Scenario
+# Rule 1: Eliminate Transportation Waste (Actual Distance = Planned Distance)
+df['ToBe_Distance_KM'] = df['Planned_Distance_KM']
+
+# Rule 2: Eliminate Waiting Waste (Cap waiting time at a maximum of 0.5 hours via Dynamic Slotting)
+df['ToBe_Waiting_Hours'] = df['Depot_Waiting_Hours'].apply(lambda x: 0.5 if x > 0.5 else x)
+
+# 4. To-Be Calculations
+df['ToBe_Fuel'] = (df['ToBe_Distance_KM'] * 0.35) + (df['ToBe_Waiting_Hours'] * 3.0)
+df['ToBe_CO2'] = df['ToBe_Fuel'] * 2.68
+
+# 5. Calculate Global Operational Savings
+asis_total_co2 = df['AsIs_CO2'].sum()
+tobe_total_co2 = df['ToBe_CO2'].sum()
+co2_savings_kg = asis_total_co2 - tobe_total_co2
+co2_savings_percent = (co2_savings_kg / asis_total_co2) * 100
+
+asis_total_fuel = df['AsIs_Fuel'].sum()
+tobe_total_fuel = df['ToBe_Fuel'].sum()
+fuel_savings_liters = asis_total_fuel - tobe_total_fuel
+
+# Print Executive Savings Report
+print("==================================================")
+print("   LEAN SIX SIGMA & GREEN OPTIMIZATION REPORT     ")
+print("==================================================")
+print(f"Baseline Carbon Footprint (As-Is) : {asis_total_co2:.2f} kg CO2")
+print(f"Optimized Carbon Footprint (To-Be): {tobe_total_co2:.2f} kg CO2")
+print(f"TOTAL CARBON REDUCTION           : {co2_savings_kg:.2f} kg CO2 ({co2_savings_percent:.1f}%)")
+print("--------------------------------------------------")
+print(f"Baseline Fuel Consumption         : {asis_total_fuel:.2f} Liters")
+print(f"Optimized Fuel Consumption        : {tobe_total_fuel:.2f} Liters")
+print(f"TOTAL FUEL SAVED                  : {fuel_savings_liters:.2f} Liters")
+print("==================================================\n")
+
+# 6. Generate "Before vs. After" Comparison Chart
+plt.figure(figsize=(12, 6))
+x = np.arange(len(df['Shipment_ID']))
+width = 0.35
+
+# Plot bars
+bars_asis = plt.bar(x - width/2, df['AsIs_CO2'], width, label='As-Is (Baseline)', color='#C62828', alpha=0.85, edgecolor='black')
+bars_tobe = plt.bar(x + width/2, df['ToBe_CO2'], width, label='To-Be (Optimized)', color='#2E7D32', alpha=0.8)
+
+
+ ==================================================
+   LEAN SIX SIGMA & GREEN OPTIMIZATION REPORT     
+==================================================
+Baseline Carbon Footprint (As-Is) : 984.90 kg CO2
+Optimized Carbon Footprint (To-Be): 801.99 kg CO2
+TOTAL CARBON REDUCTION           : 182.91 kg CO2 (18.6%)
+--------------------------------------------------
+Baseline Fuel Consumption         : 367.50 Liters
+Optimized Fuel Consumption        : 299.25 Liters
+TOTAL FUEL SAVED                  : 68.25 Liters
+==================================================
